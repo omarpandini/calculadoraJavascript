@@ -1,0 +1,36 @@
+﻿#main{
+    background-color: antiquewhite;
+    width: 20%;
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+}
+
+h1{
+    text-align: center;
+}
+
+#inputMain{
+    width: 97%;
+    height: 40px;
+    font-size: 25px;
+}
+
+.buttonCalc1{
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+}
+
+.botoes{
+    display: flex;
+    padding: 5px;
+}
+
+.divNumbers{
+    margin-left: 5px;
+}
+
+.divOperator{
+   
+    margin-left: auto;
+}
