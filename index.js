@@ -21,17 +21,21 @@ var inputVal = document.getElementById('inputMain');
 
 //Array para armazenar os resultados
 var sum = [];
-var minus = [];
 
 //Última operação antes o igual
 var lastOperator = '';
 
 //Ação dos botões
 btn1.onclick = fncBtn1;
-btnSum.onclick = fncBtSum;
+
+btnSum.onclick = function (){
+    fncBtSum('bb');
+};
+
+
 btnEqual.onclick = fncBtnEqual;
 btnClear.onclick = fncBtnClear;
-btnMinus.onclick = fncBtnMinus;
+btnMinus.onclick = fncBtSum;
 
 
 //Criação das funções
@@ -39,27 +43,24 @@ function fncBtn1() {
     inputVal.value += this.value;
 }
 
-function fncBtSum() {
+function fncBtSum(operador) {
+    console.log(operador);
     sum.push( parseFloat(inputVal.value) );
     inputVal.value = null;
     lastOperator = this.value;
     
 }
 
-function fncBtMinus() {
-    sum.push( parseFloat(inputVal.value) );
-    inputVal.value = null;
-    lastOperator = this.value;
-    
-}
 
 function fncBtnEqual(){
     var result = 0;
+    console.log('lastOperator '+lastOperator);
 
     switch (lastOperator) {
         case '+':
             sum.push( parseFloat(inputVal.value) );
             break;
+       
     
         default:
             break;
@@ -69,6 +70,8 @@ function fncBtnEqual(){
         result += element;
         console.log(element);        
     });
+
+  
 
     inputVal.value = result;
     sum = [];
