@@ -1,37 +1,5 @@
 ﻿console.log('version 1.00');
 
-var arrayteste = [['+',2]];
-arrayteste.push(['+',3]);
-arrayteste.push(['-',2]);
-arrayteste.push(['*',2]);
-arrayteste.push(['*',3]);
-arrayteste.push(['-',10]);
-
-var resultado = 0;
-
-arrayteste.forEach(element => {
-    var num = parseFloat(element[1]);
-    
-    switch (element[0]) {
-        case '+':  
-            resultado += num;
-            break;    
-        case '-':            
-            resultado += num*-1;
-            break;    
-        case '*':            
-            resultado = (resultado*num);
-            break;    
-        default:
-            break;
-    }
-
-    
-    console.log(element[0] +'  '+element[1] + ' '+resultado);
-});
-
-console.log('Resultado: '+resultado);
-
 //define os botoes
 var btn1 = document.getElementById('btn1');
 var btn2 = document.getElementById('btn2');
@@ -47,13 +15,14 @@ var btnSum = document.getElementById('btnSum');
 var btnEqual = document.getElementById('btnEqual');
 var btnClear = document.getElementById('btnClear');
 var btnMinus = document.getElementById('btnMinus');
+var btnMult = document.getElementById('btnMult');
 
 //pega o valor do input
 var inputVal = document.getElementById('inputMain');
 inputVal.focus();
 
 //Array para armazenar os resultados
-var sum = [];
+var sum = [['+',0]];
 
 //Última operação antes do igual
 var lastOperator = '+';
@@ -69,6 +38,10 @@ btnMinus.onclick = function (){
     fncBtSum('-');
 };
 
+btnMult.onclick = function (){
+    fncBtSum('*');
+};
+
 btnEqual.onclick = fncBtnEqual;
 btnClear.onclick = fncBtnClear;
 
@@ -79,36 +52,49 @@ function fncBtn1() {
 }
 
 function fncBtSum(operador) {
-    var num = 1;
-    var value = inputVal.value;
 
-    if (lastOperator == '-') {
-        num = -1;
-    }
+    var value = inputVal.value;
     
-    sum.push( parseFloat(value)*num );
+    sum.push([lastOperator, parseFloat(value)] );
     inputVal.value = null;
-    lastOperator = operador;    
+    lastOperator = operador; 
+    inputVal.focus();   
 }
 
 
 function fncBtnEqual(){
     var result = 0;
-    var num = 1;
+        
+    sum.push([lastOperator , parseFloat(inputVal.value) ]);
     
-    if (lastOperator == '-') {
-        num = -1;
-    }
-
-    sum.push( parseFloat(inputVal.value)*num );
 
     sum.forEach(element => {
-        result += element;
-    });  
 
-    inputVal.value = result;
+        var num = 0 ;
+        num = parseFloat(element[1]);
+
+        switch (element[0]) {
+            case '+':
+                result += num;
+                break;
+            case '-':
+                result -= num;
+                break;
+            case '*':
+                result = result * num;
+                break;
+        
+            default:
+                break;
+        }
+        
+    });  
+    
+    console.log(sum);
     sum = [];
     lastOperator = '+';
+    
+    inputVal.value = result;
    
 }
 
@@ -127,12 +113,17 @@ function removeCaracteres(input){
 //Funções tecla de atalho
 window.addEventListener("keydown", function (event) {  
 
+    //console.log(event.key);
+
     switch (event.key) {
         case '+':
             btnSum.click();
             break;
         case '-':
             btnMinus.click();
+            break;
+        case '*':
+            btnMult.click();
             break;
         case 'Enter':
             btnEqual.click();
