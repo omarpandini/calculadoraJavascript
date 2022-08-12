@@ -127,7 +127,6 @@ function removeCaracteres(input){
 //Funções tecla de atalho
 window.addEventListener("keydown", function (event) {  
 
-    console.log(event.key);
     switch (event.key) {
         case '+':
             btnSum.click();
@@ -153,7 +152,6 @@ window.addEventListener("keydown", function (event) {
   function somenteNumeros(e) {
     var charCode = e.charCode ? e.charCode : e.keyCode;
 
-    console.log(charCode);
     if ( (charCode >= 48 && charCode <= 57) || charCode == 46) {
         return true;
     }
