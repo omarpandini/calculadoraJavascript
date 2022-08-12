@@ -6,9 +6,6 @@ arrayteste.push(['-',2]);
 arrayteste.push(['*',2]);
 arrayteste.push(['*',3]);
 arrayteste.push(['-',10]);
-arrayteste.push(['-',12]);
-arrayteste.push(['*',10]);
-arrayteste.push(['+',45]);
 
 var resultado = 0;
 
